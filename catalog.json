@@ -1,40 +1,114 @@
 {
-  "_doc": "Fonte única da estrutura de agentes. Alimenta o verificador (scripts/check.mjs) e o grafo ao vivo (viewer/). Quando surge um domínio sem dono, o maestro adiciona o agente AQUI e cria o arquivo .claude/agents/<key>.md. Tipos: meta (governam a estrutura), domain (donos de uma área), sub (especialização de um domain).",
+  "_doc": "Fonte única da estrutura de agentes. Alimenta o verificador (scripts/check.mjs) e o grafo ao vivo (viewer/). Quando surge um domínio sem dono, o maestro adiciona o agente AQUI e cria o arquivo .claude/agents/<key>.md. Todo pedido entra pelo dispatcher, que roteia para o dono da ação e manda criar o especialista quando falta. Tipos: meta (governam a estrutura), domain (donos de uma área), sub (especialização de um domain).",
   "agents": [
-    { "key": "maestro", "name": "Maestro", "type": "meta", "parent": null, "color": "#C9A96A",
+    {
+      "key": "maestro",
+      "name": "Maestro",
+      "type": "meta",
+      "parent": null,
+      "color": "#C9A96A",
       "description": "Cria e governa os outros agentes. Quando surge um domínio sem dono, cria o agente responsável (arquivo + entrada no catálogo) e liga os sub-agentes. Mantém a estrutura coerente.",
-      "memory": ["how-it-works.md"] },
-
-    { "key": "librarian", "name": "Librarian", "type": "meta", "parent": null, "color": "#8AC96A",
+      "memory": [
+        "how-it-works.md"
+      ]
+    },
+    {
+      "key": "librarian",
+      "name": "Librarian",
+      "type": "meta",
+      "parent": null,
+      "color": "#8AC96A",
       "description": "Dono da memória (memory/). Destila as sessões em fatos curtos, mantém o índice (MEMORY.md) e carrega o contexto relevante antes de cada tarefa.",
-      "memory": ["memory-format.md"] },
-
-    { "key": "calibrator", "name": "Calibrator", "type": "meta", "parent": null, "color": "#B06AC9",
+      "memory": [
+        "memory-format.md"
+      ]
+    },
+    {
+      "key": "calibrator",
+      "name": "Calibrator",
+      "type": "meta",
+      "parent": null,
+      "color": "#B06AC9",
       "description": "ROTINA de manutenção: roda o verificador (scripts/check.mjs), acha desvios (agente sem arquivo, memória sem dono, link quebrado) e mantém tudo alinhado. Só lê e propõe.",
-      "memory": ["the-check.md", "the-loop.md"] },
-
-    { "key": "architect", "name": "Architect", "type": "domain", "parent": null, "color": "#6AA9C9",
+      "memory": [
+        "os-hooks.md",
+        "the-check.md",
+        "the-loop.md"
+      ]
+    },
+    {
+      "key": "dispatcher",
+      "name": "Dispatcher",
+      "type": "meta",
+      "parent": null,
+      "color": "#E8C46A",
+      "description": "PORTA DE ENTRADA: recebe todo pedido, identifica a ação e roteia para o especialista dono dela. Se não existe especialista para aquela ação, aciona o maestro para criar antes de executar.",
+      "memory": [
+        "roteamento-de-tarefas.md",
+        "especializacao-sob-demanda.md"
+      ]
+    },
+    {
+      "key": "architect",
+      "name": "Architect",
+      "type": "domain",
+      "parent": null,
+      "color": "#6AA9C9",
       "description": "Decisões de arquitetura e trade-offs. Registra o PORQUÊ das escolhas como memória (ADR).",
-      "memory": ["example-decision.md"] },
-
-    { "key": "builder", "name": "Builder", "type": "domain", "parent": null, "color": "#6AC9B0",
+      "memory": [
+        "example-decision.md"
+      ]
+    },
+    {
+      "key": "builder",
+      "name": "Builder",
+      "type": "domain",
+      "parent": null,
+      "color": "#6AC9B0",
       "description": "Implementa as mudanças seguindo as convenções do projeto. Toda mudança passa pela memória e pelos agentes por padrão.",
-      "memory": ["example-convention.md"] },
-
-    { "key": "reviewer", "name": "Reviewer", "type": "domain", "parent": null, "color": "#C96A8A",
+      "memory": [
+        "example-convention.md"
+      ]
+    },
+    {
+      "key": "reviewer",
+      "name": "Reviewer",
+      "type": "domain",
+      "parent": null,
+      "color": "#C96A8A",
       "description": "Revisa o código antes de entrar. Delega para os sub-agentes de segurança e performance.",
-      "memory": ["example-learning.md"] },
-
-    { "key": "docs", "name": "Docs", "type": "domain", "parent": null, "color": "#C9846A",
+      "memory": [
+        "example-learning.md"
+      ]
+    },
+    {
+      "key": "docs",
+      "name": "Docs",
+      "type": "domain",
+      "parent": null,
+      "color": "#C9846A",
       "description": "Documentação e captura de conhecimento. Ao aprender algo não óbvio, vira memória.",
-      "memory": ["memory-format.md"] },
-
-    { "key": "security-review", "name": "Security review", "type": "sub", "parent": "reviewer", "color": "#C96A8A",
+      "memory": [
+        "memory-format.md"
+      ]
+    },
+    {
+      "key": "security-review",
+      "name": "Security review",
+      "type": "sub",
+      "parent": "reviewer",
+      "color": "#C96A8A",
       "description": "Especialização do reviewer: procura vazamento de segredo, injeção, autorização frágil.",
-      "memory": [] },
-
-    { "key": "performance-review", "name": "Performance review", "type": "sub", "parent": "reviewer", "color": "#C96A8A",
+      "memory": []
+    },
+    {
+      "key": "performance-review",
+      "name": "Performance review",
+      "type": "sub",
+      "parent": "reviewer",
+      "color": "#C96A8A",
       "description": "Especialização do reviewer: N+1, alocação desnecessária, índice faltando.",
-      "memory": [] }
+      "memory": []
+    }
   ]
 }

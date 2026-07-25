@@ -5,6 +5,8 @@ metadata:
   type: feedback
 ---
 
+**Este ciclo não depende de lembrança: ele é disparado pelos hooks do harness** — ver [[os-hooks]].
+
 Toda funcionalidade/mudança passa por este fluxo **por padrão, sem precisar pedir**:
 
 1. **Memória primeiro:** consulte a memória relevante antes de agir; ao decidir algo, descobrir uma
