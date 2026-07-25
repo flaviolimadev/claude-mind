@@ -1,0 +1,3 @@
+{"at":"2026-01-01T12:00:00.000Z","agent":"maestro","type":"criou","summary":"estrutura inicial: agentes meta (maestro, librarian, calibrator) + domínios"}
+{"at":"2026-01-01T12:05:00.000Z","agent":"librarian","type":"registrou","summary":"memórias de exemplo (decisão, convenção, aprendizado)"}
+{"at":"2026-01-01T12:10:00.000Z","agent":"calibrator","type":"verificou","summary":"check.mjs: 0 desvios — memória e agentes em sincronia"}

@@ -1,0 +1,13 @@
+{
+  "name": "claude-mind",
+  "version": "0.1.0",
+  "description": "Memória persistente + agentes/sub-agentes + auto-aprendizado para assistentes de código, com um grafo ao vivo. Sem dependências.",
+  "type": "module",
+  "scripts": {
+    "view": "node viewer/server.mjs",
+    "check": "node scripts/check.mjs",
+    "log": "node scripts/log.mjs"
+  },
+  "license": "MIT",
+  "engines": { "node": ">=18" }
+}

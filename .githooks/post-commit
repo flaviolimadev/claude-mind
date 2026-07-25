@@ -1,0 +1,5 @@
+#!/bin/sh
+# Auto-aprendizado: registra cada commit como atividade (alimenta o grafo).
+# Ative uma vez com:  git config core.hooksPath .githooks
+msg=$(git log -1 --pretty=%s)
+node scripts/log.mjs builder committed "$msg" >/dev/null 2>&1 || true
