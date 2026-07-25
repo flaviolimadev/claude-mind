@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>claude-mind — memória persistente e agentes para o Claude Code</title>
+<meta name="description" content="Seu assistente de código perde o contexto entre sessões. O claude-mind dá memória de longo prazo, agentes que se especializam sozinhos e um loop automático por hooks. Sem dependências. Persistent memory and self-specializing agents for Claude Code.">
+<meta name="keywords" content="claude code memory, claude code agents, claude code subagents, claude code hooks, persistent memory AI assistant, CLAUDE.md, memória claude code, agentes de IA, AI coding assistant context">
+<link rel="canonical" href="https://flaviolimadev.github.io/claude-mind/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="claude-mind — memória persistente e agentes para o Claude Code">
+<meta property="og:description" content="O assistente esquece tudo entre sessões. Esta estrutura dá a ele memória de longo prazo, um time de agentes que se especializam sozinhos e um loop automático por hooks.">
+<meta property="og:url" content="https://flaviolimadev.github.io/claude-mind/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="claude-mind — memória persistente para o Claude Code">
+<meta name="twitter:description" content="Memória de longo prazo, agentes que se especializam sozinhos e loop automático por hooks. Sem dependências.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"claude-mind",
+"applicationCategory":"DeveloperApplication","operatingSystem":"macOS, Linux, Windows (WSL)",
+"description":"Memória persistente, agentes e sub-agentes auto-especializantes e loop automático por hooks para assistentes de código como o Claude Code.",
+"url":"https://flaviolimadev.github.io/claude-mind/",
+"codeRepository":"https://github.com/flaviolimadev/claude-mind",
+"programmingLanguage":"JavaScript","license":"https://opensource.org/licenses/MIT",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+"author":{"@type":"Person","name":"Flavio Lima"}}
+</script>
+<style>
+:root{--bg:#0c0c0f;--panel:#15151a;--line:#26262e;--txt:#ececed;--dim:#9a9aa6;--gold:#C9A96A;--green:#6AC96A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px}
+header{padding:76px 0 54px;text-align:center}
+h1{font-size:clamp(30px,6vw,46px);margin:0 0 16px;letter-spacing:-.5px}
+h1 span{color:var(--gold)}
+.sub{font-size:clamp(17px,2.4vw,20px);color:var(--dim);max-width:620px;margin:0 auto 30px}
+.cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-block;background:var(--gold);color:#1a1500;padding:12px 22px;border-radius:9px;
+  font-weight:700;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+pre{background:#0f0f13;border:1px solid var(--line);border-radius:11px;padding:16px 18px;overflow-x:auto;
+  font:13.5px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#d8d8dc}
+h2{font-size:24px;margin:52px 0 16px;letter-spacing:-.2px}
+h3{font-size:17px;margin:28px 0 8px}
+p,li{color:#c9c9d2}
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.7px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:22px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
+.card h3{margin:0 0 7px;font-size:16px}
+.card p{margin:0;font-size:14.5px;color:var(--dim)}
+footer{margin:70px 0 46px;padding-top:26px;border-top:1px solid var(--line);color:var(--dim);font-size:14px;text-align:center}
+a{color:var(--gold)}
+.en{border-left:3px solid var(--line);padding-left:16px;color:var(--dim);font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>claude<span>-</span>mind</h1>
+  <p class="sub">Seu assistente de código <b>esquece tudo</b> entre uma sessão e outra.
+  Esta estrutura dá a ele memória de longo prazo, um time de agentes que se especializam sozinhos
+  e um loop que roda automaticamente.</p>
+  <div class="cta">
+    <a class="btn" href="https://github.com/flaviolimadev/claude-mind">Ver no GitHub</a>
+    <a class="btn ghost" href="#instalar">Instalar</a>
+  </div>
+</header>
+
+<h2>O problema</h2>
+<p>Você explica a arquitetura do projeto, o assistente resolve a tarefa — e na sessão seguinte ele
+começa do zero. O contexto vive na janela da conversa, não em disco. Toda decisão explicada, toda
+armadilha descoberta e todo padrão combinado evaporam quando a sessão fecha.</p>
+
+<table>
+  <tr><th>Sem memória</th><th>Com o claude-mind</th></tr>
+  <tr><td>Você reexplica a arquitetura toda sessão</td><td>Ele abre a sessão já sabendo o que foi decidido e por quê</td></tr>
+  <tr><td>A mesma armadilha se repete meses depois</td><td>A armadilha virou um fato registrado, lido antes de agir</td></tr>
+  <tr><td>"Faz aí" vira improviso</td><td>A ação vai ao agente dono dela — e se não existe, ele é criado antes</td></tr>
+  <tr><td>O aprendizado depende de você lembrar de anotar</td><td>Três hooks fazem o loop rodar sozinho</td></tr>
+</table>
+
+<h2 id="instalar">Instalar</h2>
+<pre>git clone https://github.com/flaviolimadev/claude-mind.git
+cd claude-mind
+node scripts/install.mjs /caminho/do/seu/projeto</pre>
+<p>Não sobrescreve nada: pula arquivos existentes e <b>funde</b> o <code>settings.json</code> que você
+já tiver. Node ≥18, zero dependências.</p>
+
+<h2>As peças</h2>
+<div class="grid">
+  <div class="card"><h3>Memória</h3><p>Um arquivo markdown por fato, indexado. É o que sobrevive entre sessões.</p></div>
+  <div class="card"><h3>Agentes</h3><p>Um dono por domínio, com função única, regras próprias e a memória que ele lê.</p></div>
+  <div class="card"><h3>Dispatcher</h3><p>A porta de entrada: decompõe o pedido em ações e acha o dono de cada uma.</p></div>
+  <div class="card"><h3>Hooks</h3><p>Carregam a memória ao abrir, impõem o protocolo a cada mensagem e barram o encerramento com desvio.</p></div>
+  <div class="card"><h3>Verificador</h3><p>Cruza catálogo, agentes e memória e aponta o que saiu de sincronia. Só lê.</p></div>
+  <div class="card"><h3>Grafo ao vivo</h3><p>Abre no navegador e mostra a "mente" crescer enquanto você trabalha.</p></div>
+</div>
+
+<h2>Especialistas que nascem sozinhos</h2>
+<p>Existe um agente dono de revisão. Chega um pedido de <i>revisão de acessibilidade</i>. O dispatcher
+procura um especialista nisso e, se não houver, <b>manda criar antes de revisar</b>. O time cresce
+exatamente onde o trabalho aparece — e cada agente vira especialista de um recorte estreito, com
+regra própria e resultado previsível.</p>
+<p>Há um critério explícito para <b>não</b> criar: recorte usado uma vez só e sem regra própria é
+parâmetro, não agente. Sem esse freio a estrutura incha de agentes vazios.</p>
+
+<h2>Perguntas frequentes</h2>
+<h3>Como dar memória persistente ao Claude Code?</h3>
+<p>Instalando esta estrutura no seu projeto. A memória vira arquivos markdown versionados e o hook de
+abertura os carrega sozinho no começo de cada sessão.</p>
+<h3>Por que o assistente perde o contexto entre sessões?</h3>
+<p>Porque o contexto vive na janela da conversa, não em disco. O que não estiver em arquivo se perde.</p>
+<h3>Isso substitui o CLAUDE.md?</h3>
+<p>Não, complementa: o <code>CLAUDE.md</code> diz <i>como trabalhar aqui</i>; a memória guarda
+<i>o que já foi aprendido</i>, um fato por arquivo, com dono e verificação.</p>
+<h3>Serve para projetos que não são de código?</h3>
+<p>Sim — nasceu num projeto de produção de vídeo, onde os domínios eram roteiro, geração e montagem.</p>
+
+<h2>In English</h2>
+<p class="en"><b>Persistent memory and self-specializing agents for Claude Code.</b> Your AI coding
+assistant loses context between sessions: you explain the codebase, it delivers, and tomorrow it
+starts from zero. claude-mind gives it long-term memory (one fact per file, indexed and versioned),
+a team of domain agents and sub-agents that are created on demand when a new kind of work appears,
+an automatic loop wired through Claude Code hooks, a consistency checker and a live graph.
+Zero dependencies, pure Node, works in any project and any language.</p>
+
+<footer>
+  MIT · <a href="https://github.com/flaviolimadev/claude-mind">github.com/flaviolimadev/claude-mind</a>
+</footer>
+
+</div>
+</body>
+</html>

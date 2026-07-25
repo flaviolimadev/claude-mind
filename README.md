@@ -1,13 +1,31 @@
-# 🧠 claude-mind
+# 🧠 claude-mind — memória persistente e agentes para o Claude Code
 
-> Uma **memória persistente + time de agentes + auto-aprendizado** para assistentes de código
-> (Claude Code e afins), com um **grafo ao vivo** pra você ver a "mente" crescer. Sem dependências.
->
-> *A persistent memory + agent team + self-learning loop for coding assistants, with a live graph. Zero dependencies.*
+> **O assistente de código esquece tudo entre uma sessão e outra.** Você explica a arquitetura, ele
+> resolve, e no dia seguinte começa do zero. O `claude-mind` dá a ele **memória de longo prazo**, um
+> **time de agentes e sub-agentes** que se especializam sozinhos, e um **loop automático por hooks**
+> que mantém tudo em sincronia. Sem dependências, Node puro.
 
-O problema: o assistente **perde o contexto** entre sessões. Você explica tudo, ele resolve, e na sessão
-seguinte começa do zero. Esta estrutura dá a ele uma **memória de longo prazo** e um **time de agentes**
-que se mantêm em sincronia — e um verificador que garante que nada se perde.
+<p align="center">
+  <a href="#começar"><b>Instalar em 1 comando</b></a> ·
+  <a href="#o-loop-de-auto-aprendizado-automático">Como funciona</a> ·
+  <a href="#um-agente-por-ação-e-especialistas-que-nascem-sozinhos">Agentes</a> ·
+  <a href="https://flaviolimadev.github.io/claude-mind/">Site</a>
+</p>
+
+**Persistent memory + self-specializing agents for Claude Code.** Your AI coding assistant loses
+context between sessions: you explain the codebase, it delivers, and tomorrow it starts from zero.
+`claude-mind` gives it long-term memory (one fact per file), a team of domain agents and sub-agents,
+an automatic loop wired through Claude Code hooks, a consistency checker, and a live graph. Zero
+dependencies, pure Node — works in any project, any language.
+
+### O que muda na prática
+
+| Sem memória | Com o claude-mind |
+|---|---|
+| Você reexplica a arquitetura toda sessão | Ele abre a sessão já sabendo o que foi decidido e por quê |
+| A mesma armadilha é repetida meses depois | A armadilha virou um fato registrado, lido antes de agir |
+| "Faz aí" vira improviso | A ação vai para o agente **dono** dela — e se não existe, ele é criado antes |
+| O aprendizado depende de você lembrar de anotar | Três hooks fazem o loop rodar sozinho |
 
 ## As 6 peças
 
@@ -127,6 +145,33 @@ fatos em `memory/` (o `librarian`), e rode o `check` (o `calibrator`). O grafo m
 - **calibrator** — roda o verificador e mantém tudo alinhado.
 
 Os agentes de **domínio** são os do seu projeto — o `install.mjs` não os inventa de propósito.
+
+## Perguntas frequentes
+
+**Como dar memória persistente ao Claude Code?**
+Instale a estrutura no seu projeto (`node scripts/install.mjs /seu/projeto`). A memória vira arquivos
+markdown em `memory/`, indexados em `MEMORY.md`, e o hook de `SessionStart` os carrega sozinho no
+começo de cada sessão.
+
+**Por que o Claude Code perde o contexto entre sessões?**
+Porque o contexto vive na janela da conversa, não em disco. O que não estiver em arquivo se perde.
+O `claude-mind` transforma o que foi aprendido em fatos versionados no repositório.
+
+**Isso substitui o `CLAUDE.md`?**
+Não — complementa. O `CLAUDE.md` diz *como trabalhar aqui*; a `memory/` guarda *o que já foi
+aprendido*, um fato por arquivo, com dono e verificação.
+
+**Funciona com outros assistentes?**
+A memória e o catálogo são markdown e JSON — qualquer assistente lê. Os hooks são o formato do
+Claude Code; em outro harness, o mesmo loop pode ser disparado por outro gatilho.
+
+**Serve para projetos que não são de código?**
+Sim. Aqui nasceu num projeto de produção de vídeo — os domínios eram roteiro, geração, montagem.
+Domínio é o que o *seu* projeto faz.
+
+**Does it work in English / other languages?**
+Yes. The structure is language-agnostic; the shipped memory files are in Portuguese and can be
+replaced by your own in any language.
 
 ## Licença
 
