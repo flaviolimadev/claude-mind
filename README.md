@@ -12,6 +12,10 @@
   <a href="https://flaviolimadev.github.io/claude-mind/">Site</a>
 </p>
 
+<p align="center">
+  <img src="docs/graph.svg" alt="grafo ao vivo do claude-mind — agentes (círculos) ligados às memórias que leem (quadrados)" width="100%">
+</p>
+
 **Persistent memory + self-specializing agents for Claude Code.** Your AI coding assistant loses
 context between sessions: you explain the codebase, it delivers, and tomorrow it starts from zero.
 `claude-mind` gives it long-term memory (one fact per file), a team of domain agents and sub-agents,
@@ -40,7 +44,14 @@ dependencies, pure Node — works in any project, any language.
 
 ## Começar
 
-**Instalar no SEU projeto** (não sobrescreve nada, funde o `settings.json` que você já tem):
+**Instalar no SEU projeto** (não sobrescreve nada, funde o `settings.json` que você já tem).
+De dentro da pasta do projeto:
+
+```bash
+npx @flaviolimadev/claude-mind@latest .
+```
+
+Prefere sem npm? O mesmo instalador roda do clone:
 
 ```bash
 git clone https://github.com/flaviolimadev/claude-mind.git
@@ -66,7 +77,8 @@ Não precisa `npm install` — é tudo Node puro (>=18). Abra a pasta no seu ass
 `node viewer/server.mjs` sobe um servidor local que desenha os **agentes** (círculos, coloridos por tipo)
 ligados às **memórias** (quadradinhos) que cada um lê. Arraste pra mover, scroll pra zoom, clique num nó
 pra ver o detalhe. Edite qualquer arquivo e o grafo **atualiza sozinho** (SSE). O painel lateral mostra a
-**atividade recente** — o crescimento da mente.
+**atividade recente** — o crescimento da mente. O banner lá de cima é o mesmo grafo em SVG, gerado dos
+dados reais com `node scripts/graph-svg.mjs` (regenere quando o seu time de agentes mudar).
 
 ## O loop de auto-aprendizado (automático)
 

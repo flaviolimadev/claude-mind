@@ -5,6 +5,7 @@
  * funde o .claude/settings.json existente em vez de substituir, e não toca no que já existe.
  *
  * Uso, de dentro do claude-mind:  node scripts/install.mjs /caminho/do/seu/projeto
+ * Ou, de dentro do SEU projeto:   npx @flaviolimadev/claude-mind@latest .
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -12,7 +13,7 @@ import { fileURLToPath } from 'node:url';
 
 const src = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dst = path.resolve(process.argv[2] || '');
-if (!process.argv[2]) { console.error('uso: node scripts/install.mjs <pasta-do-projeto>'); process.exit(1); }
+if (!process.argv[2]) { console.error('uso: node scripts/install.mjs <pasta-do-projeto>   (ou: npx @flaviolimadev/claude-mind <pasta>)'); process.exit(1); }
 if (!fs.existsSync(dst)) { console.error(`pasta não existe: ${dst}`); process.exit(1); }
 if (path.resolve(src) === dst) { console.error('destino é o próprio claude-mind'); process.exit(1); }
 
@@ -35,7 +36,7 @@ const copy = (rel, transform) => {
 console.log(`\ninstalando claude-mind em ${dst}\n`);
 
 // scripts, hooks e viewer vão inteiros
-for (const f of ['scripts/check.mjs', 'scripts/log.mjs', 'scripts/install.mjs',
+for (const f of ['scripts/check.mjs', 'scripts/log.mjs', 'scripts/install.mjs', 'scripts/graph-svg.mjs',
                  'viewer/server.mjs', 'viewer/index.html',
                  '.claude/hooks/mind-load.mjs', '.claude/hooks/mind-remind.mjs', '.claude/hooks/mind-verify.mjs',
                  '.githooks/post-commit']) copy(f);

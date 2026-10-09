@@ -1,13 +1,38 @@
 {
-  "name": "claude-mind",
+  "name": "@flaviolimadev/claude-mind",
   "version": "0.2.0",
   "description": "Memória persistente + agentes/sub-agentes + auto-aprendizado para assistentes de código, com um grafo ao vivo. Sem dependências.",
   "type": "module",
+  "bin": { "claude-mind": "scripts/install.mjs" },
+  "files": [
+    "catalog.json",
+    "scripts",
+    "viewer",
+    ".claude",
+    ".githooks",
+    "memory"
+  ],
   "scripts": {
     "view": "node viewer/server.mjs",
     "check": "node scripts/check.mjs",
-    "log": "node scripts/log.mjs"
+    "log": "node scripts/log.mjs",
+    "banner": "node scripts/graph-svg.mjs"
   },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "ai-agents",
+    "subagents",
+    "memory",
+    "hooks",
+    "context-engineering",
+    "developer-tools"
+  ],
+  "repository": { "type": "git", "url": "git+https://github.com/flaviolimadev/claude-mind.git" },
+  "homepage": "https://flaviolimadev.github.io/claude-mind/",
+  "bugs": { "url": "https://github.com/flaviolimadev/claude-mind/issues" },
+  "author": "Flavio Lima",
   "license": "MIT",
+  "publishConfig": { "access": "public" },
   "engines": { "node": ">=18" }
 }
