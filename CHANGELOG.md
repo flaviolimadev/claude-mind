@@ -3,6 +3,23 @@
 Todas as mudanças relevantes do claude-mind, da mais nova pra mais antiga.
 Nas aulas e tutoriais, referencie a versão (tag) — assim o material não quebra quando o projeto evoluir.
 
+## [0.3.0] — 2026-10-09
+
+### Adicionado
+- **Módulos (setores) opcionais**: pacotes de agentes + memórias pré-destiladas por stack, em
+  `modules/<key>/` (manifesto `module.json` + `agents/` + `memory/`). Comandos:
+  `npx @flaviolimadev/claude-mind list` e `… add <modulo>` (roteados pelo `install.mjs`;
+  motor em `scripts/module.mjs`). O `add` funde agentes no `catalog.json`, copia memórias,
+  atualiza o `MEMORY.md`, registra no log e fecha com o check — idempotente, nunca sobrescreve.
+- **Módulo piloto `deploy-easypanel`**: domínio `deploy` + sub `deploy-easypanel`, com 3 memórias
+  de armadilhas reais (bind `0.0.0.0`, filesystem efêmero/volumes, env no painel, DNS antes do
+  SSL, conexão interna de banco, backup antes de migration).
+- Seção "Módulos (setores) opcionais" no README.
+
+### Mudado
+- `install.mjs` virou roteador (`<pasta>` instala a base; `add`/`list` delegam aos módulos) e
+  passou a copiar `scripts/module.mjs` pro projeto destino.
+
 ## [0.2.0] — 2026-10-09
 
 ### Adicionado

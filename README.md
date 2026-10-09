@@ -72,6 +72,27 @@ node viewer/server.mjs      # abre o grafo ao vivo em http://localhost:4173
 Não precisa `npm install` — é tudo Node puro (>=18). Abra a pasta no seu assistente de código: ele lê
 `.claude/agents/` e a `memory/` e passa a trabalhar com contexto.
 
+## Módulos (setores) opcionais
+
+Setores prontos — agentes + memórias **já destiladas** de um stack — que você adiciona por opção:
+
+```bash
+npx @flaviolimadev/claude-mind list
+npx @flaviolimadev/claude-mind add deploy-easypanel
+```
+
+| Módulo | O quê |
+|---|---|
+| `deploy-easypanel` | Hospedagem em VPS com EasyPanel: app via GitHub (Nixpacks/Dockerfile), Postgres interno, domínio/SSL, env e volumes — com as armadilhas reais (bind 0.0.0.0, volume pra uploads, DNS antes do SSL). |
+
+Cada módulo traz o domínio + subs pro `catalog.json`, os `.md` dos agentes e memórias com
+**armadilhas de verdade** (e data de verificação). O `add` não sobrescreve nada, atualiza o
+`MEMORY.md` e fecha com o check zerado — rodar duas vezes não duplica. Próximos setores no
+roadmap: `dev-node`, `dev-php`, `dev-postgres`, `dev-lovable`, `design-higgsfield`.
+
+**Regra de ouro:** instale só o setor que o seu projeto USA. Módulo de stack que você não usa é
+inflação — vale o mesmo critério de `memory/especializacao-sob-demanda.md`.
+
 ## O grafo ao vivo
 
 `node viewer/server.mjs` sobe um servidor local que desenha os **agentes** (círculos, coloridos por tipo)

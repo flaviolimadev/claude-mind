@@ -1,0 +1,36 @@
+{
+  "key": "deploy-easypanel",
+  "name": "Deploy · EasyPanel",
+  "version": "0.1.0",
+  "verifiedAt": "2026-10-09",
+  "description": "Hospedagem em VPS com EasyPanel: app via GitHub (Nixpacks/Dockerfile), Postgres interno, domínio/SSL, env e volumes.",
+  "agents": [
+    {
+      "key": "deploy",
+      "name": "Deploy",
+      "type": "domain",
+      "parent": null,
+      "color": "#7F8AC9",
+      "description": "Dono da publicação: ambientes, estratégia de deploy, rollback e configuração de produção. Delega o provedor ao sub especialista.",
+      "memory": []
+    },
+    {
+      "key": "deploy-easypanel",
+      "name": "Deploy · EasyPanel",
+      "type": "sub",
+      "parent": "deploy",
+      "color": "#7F8AC9",
+      "description": "Especialização do deploy: serviços no EasyPanel (VPS) — app via GitHub com Nixpacks ou Dockerfile, banco interno, domínio/SSL, env e volumes.",
+      "memory": [
+        "easypanel-fluxo-de-deploy.md",
+        "easypanel-armadilhas.md",
+        "easypanel-banco-e-backup.md"
+      ]
+    }
+  ],
+  "memory": [
+    "easypanel-fluxo-de-deploy.md",
+    "easypanel-armadilhas.md",
+    "easypanel-banco-e-backup.md"
+  ]
+}

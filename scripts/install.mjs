@@ -10,10 +10,17 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { spawnSync } from 'node:child_process';
 
 const src = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+
+// roteador: `add`/`list` são dos módulos (setores) — delega pro scripts/module.mjs
+if (process.argv[2] === 'add' || process.argv[2] === 'list') {
+  const r = spawnSync(process.execPath, [path.join(src, 'scripts', 'module.mjs'), ...process.argv.slice(2)], { stdio: 'inherit' });
+  process.exit(r.status ?? 0);
+}
 const dst = path.resolve(process.argv[2] || '');
-if (!process.argv[2]) { console.error('uso: node scripts/install.mjs <pasta-do-projeto>   (ou: npx @flaviolimadev/claude-mind <pasta>)'); process.exit(1); }
+if (!process.argv[2]) { console.error('uso: node scripts/install.mjs <pasta-do-projeto> | add <modulo> [pasta] | list   (ou: npx @flaviolimadev/claude-mind …)'); process.exit(1); }
 if (!fs.existsSync(dst)) { console.error(`pasta não existe: ${dst}`); process.exit(1); }
 if (path.resolve(src) === dst) { console.error('destino é o próprio claude-mind'); process.exit(1); }
 
@@ -36,7 +43,7 @@ const copy = (rel, transform) => {
 console.log(`\ninstalando claude-mind em ${dst}\n`);
 
 // scripts, hooks e viewer vão inteiros
-for (const f of ['scripts/check.mjs', 'scripts/log.mjs', 'scripts/install.mjs', 'scripts/graph-svg.mjs',
+for (const f of ['scripts/check.mjs', 'scripts/log.mjs', 'scripts/install.mjs', 'scripts/graph-svg.mjs', 'scripts/module.mjs',
                  'viewer/server.mjs', 'viewer/index.html',
                  '.claude/hooks/mind-load.mjs', '.claude/hooks/mind-remind.mjs', '.claude/hooks/mind-verify.mjs',
                  '.githooks/post-commit']) copy(f);

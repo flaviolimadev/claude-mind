@@ -1,6 +1,6 @@
 {
   "name": "@flaviolimadev/claude-mind",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Memória persistente + agentes/sub-agentes + auto-aprendizado para assistentes de código, com um grafo ao vivo. Sem dependências.",
   "type": "module",
   "bin": { "claude-mind": "scripts/install.mjs" },
@@ -10,7 +10,8 @@
     "viewer",
     ".claude",
     ".githooks",
-    "memory"
+    "memory",
+    "modules"
   ],
   "scripts": {
     "view": "node viewer/server.mjs",
