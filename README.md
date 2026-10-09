@@ -84,11 +84,15 @@ npx @flaviolimadev/claude-mind add deploy-easypanel
 | Módulo | O quê |
 |---|---|
 | `deploy-easypanel` | Hospedagem em VPS com EasyPanel: app via GitHub (Nixpacks/Dockerfile), Postgres interno, domínio/SSL, env e volumes — com as armadilhas reais (bind 0.0.0.0, volume pra uploads, DNS antes do SSL). |
+| `dev-node` | Node.js: ESM vs CJS sem tropeço, `process.env` é sempre string, scripts npm como interface, critério antes de toda dependência. |
+| `dev-php` | PHP/Laravel: FormRequest e controller enxuto, N+1 (incl. MorphTo), `env()` nulo com config cacheada, sequência de release. |
+| `dev-postgres` | Postgres: migration sem lock em tabela viva, índice guiado por EXPLAIN (FK não ganha índice sozinha), timestamptz e numeric. |
 
-Cada módulo traz o domínio + subs pro `catalog.json`, os `.md` dos agentes e memórias com
+Os três `dev-*` compartilham o domínio-pai `dev` — instale um ou os três, a hierarquia se monta
+sozinha. Cada módulo traz o domínio + subs pro `catalog.json`, os `.md` dos agentes e memórias com
 **armadilhas de verdade** (e data de verificação). O `add` não sobrescreve nada, atualiza o
 `MEMORY.md` e fecha com o check zerado — rodar duas vezes não duplica. Próximos setores no
-roadmap: `dev-node`, `dev-php`, `dev-postgres`, `dev-lovable`, `design-higgsfield`.
+roadmap: `dev-lovable`, `design-higgsfield`.
 
 **Regra de ouro:** instale só o setor que o seu projeto USA. Módulo de stack que você não usa é
 inflação — vale o mesmo critério de `memory/especializacao-sob-demanda.md`.

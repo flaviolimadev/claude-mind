@@ -3,6 +3,21 @@
 Todas as mudanças relevantes do claude-mind, da mais nova pra mais antiga.
 Nas aulas e tutoriais, referencie a versão (tag) — assim o material não quebra quando o projeto evoluir.
 
+## [0.4.0] — 2026-10-09
+
+### Adicionado
+- **Três módulos de tecnologia** (F2 do plano de setores), todos compartilhando o domínio-pai
+  `dev` (instalado uma vez, pulado nos demais):
+  - **`dev-node`** — ESM vs CJS (os erros clássicos e a saída de cada um), `process.env` sempre
+    string + `--env-file` nativo, scripts npm como interface, critério de três perguntas antes de
+    qualquer dependência.
+  - **`dev-php`** — convenções que o Laravel premia, armadilhas de produção (N+1 incl. MorphTo,
+    `env()` nulo com config cacheada, timezone deslocando relatório, Model serializado na fila) e
+    a sequência de release completa.
+  - **`dev-postgres`** — migrations sem lock em tabela viva (NOT NULL em 3 passos, INDEX
+    CONCURRENTLY fora de transação), otimização guiada por EXPLAIN (FK sem índice automático) e
+    tipos certos (timestamptz, numeric, bigint identity).
+
 ## [0.3.0] — 2026-10-09
 
 ### Adicionado

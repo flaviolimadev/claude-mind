@@ -1,0 +1,36 @@
+{
+  "key": "dev-node",
+  "name": "Dev · Node.js",
+  "version": "0.1.0",
+  "verifiedAt": "2026-10-09",
+  "description": "Desenvolvimento em Node.js: ESM vs CJS sem tropeço, env e scripts npm como interface, critério pra dependências.",
+  "agents": [
+    {
+      "key": "dev",
+      "name": "Dev",
+      "type": "domain",
+      "parent": null,
+      "color": "#6AB0C9",
+      "description": "Dono do desenvolvimento: implementa mudanças em diffs pequenos, seguindo as convenções do projeto, com teste antes de dar por pronto. Delega o stack ao sub especialista.",
+      "memory": []
+    },
+    {
+      "key": "dev-node",
+      "name": "Dev · Node.js",
+      "type": "sub",
+      "parent": "dev",
+      "color": "#6AB0C9",
+      "description": "Especialização do dev: Node.js — ESM vs CJS, process.env e scripts npm, filosofia de dependências. Resolve erro de módulo pela memória, não na tentativa.",
+      "memory": [
+        "node-esm-cjs.md",
+        "node-env-e-scripts.md",
+        "node-zero-deps.md"
+      ]
+    }
+  ],
+  "memory": [
+    "node-esm-cjs.md",
+    "node-env-e-scripts.md",
+    "node-zero-deps.md"
+  ]
+}
