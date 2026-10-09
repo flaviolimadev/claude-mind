@@ -33,8 +33,8 @@ const idx = R('memory/MEMORY.md');
 
 // A) agentes ↔ arquivos
 const mdFiles = ls('.claude/agents').filter((f) => f.endsWith('.md')).map((f) => f.replace('.md', ''));
-const semMd = agents.filter((a) => (a.type === 'domain' || a.type === 'meta') && !exists(`.claude/agents/${a.key}.md`)).map((a) => a.key);
-check(semMd.length === 0, 'todo agente domain/meta tem .claude/agents/<key>.md', semMd.join(', '));
+const semMd = agents.filter((a) => !exists(`.claude/agents/${a.key}.md`)).map((a) => a.key);
+check(semMd.length === 0, 'todo agente do catálogo tem .claude/agents/<key>.md', semMd.join(', '));
 const orfaos = mdFiles.filter((m) => !keys.has(m));
 check(orfaos.length === 0, 'nenhum .md órfão (sem entrada no catálogo)', orfaos.join(', '));
 const parentQuebrado = agents.filter((a) => a.parent && !keys.has(a.parent)).map((a) => `${a.key}→${a.parent}`);

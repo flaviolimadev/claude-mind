@@ -10,8 +10,8 @@ que não perde o contexto entre sessões. São cinco peças que se alimentam:
 
 1. **`catalog.json`** — a fonte única do time de agentes. Cada agente tem `key`, `type`
    (`meta` | `domain` | `sub`), `parent`, `description` e `memory[]` (quais fatos ele lê antes de agir).
-2. **`.claude/agents/*.md`** — os agentes de verdade que o Claude Code usa (um arquivo por agente de
-   domínio/meta). Os `sub` vivem dentro do `.md` do pai.
+2. **`.claude/agents/*.md`** — os agentes de verdade que o Claude Code usa: um arquivo por agente,
+   incluindo os `sub` (assim eles viram subagentes invocáveis). A hierarquia (`parent`) vive no catálogo.
 3. **`memory/`** — a base de conhecimento: um arquivo markdown por fato, indexado em `MEMORY.md`.
    É a memória de longo prazo — o que ficou decidido, aprendido, convencionado.
 4. **`scripts/check.mjs`** — o verificador: cruza catálogo ↔ arquivos ↔ memória e aponta o que saiu de

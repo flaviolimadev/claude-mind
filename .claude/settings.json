@@ -4,21 +4,21 @@
       {
         "matcher": "startup|resume|clear|compact",
         "hooks": [
-          { "type": "command", "command": "bash .claude/hooks/mind-load.sh", "timeout": 10 }
+          { "type": "command", "command": "node .claude/hooks/mind-load.mjs", "timeout": 10 }
         ]
       }
     ],
     "UserPromptSubmit": [
       {
         "hooks": [
-          { "type": "command", "command": "bash .claude/hooks/mind-remind.sh", "timeout": 5 }
+          { "type": "command", "command": "node .claude/hooks/mind-remind.mjs", "timeout": 5 }
         ]
       }
     ],
     "Stop": [
       {
         "hooks": [
-          { "type": "command", "command": "bash .claude/hooks/mind-verify.sh", "timeout": 20 }
+          { "type": "command", "command": "node .claude/hooks/mind-verify.mjs", "timeout": 20 }
         ]
       }
     ]

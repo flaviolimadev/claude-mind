@@ -32,7 +32,7 @@ dependencies, pure Node — works in any project, any language.
 | Peça | O quê |
 |---|---|
 | `catalog.json` | A **fonte única** do time de agentes (key, tipo, pai, descrição, memória que ele lê). |
-| `.claude/agents/*.md` | Os **agentes** que o Claude Code usa (um por domínio/meta; os `sub` vivem no pai). |
+| `.claude/agents/*.md` | Os **agentes** que o Claude Code usa — um arquivo por agente (meta, domínio e sub); a hierarquia (`parent`) fica no catálogo. |
 | `memory/` | A **memória**: um arquivo markdown por fato, indexado em `MEMORY.md`. |
 | `scripts/check.mjs` | O **verificador**: cruza catálogo ↔ agentes ↔ memória e aponta o que saiu de sincronia. |
 | `viewer/` | O **grafo AO VIVO**: abre no navegador e atualiza em tempo real quando você edita os arquivos. |
@@ -43,7 +43,7 @@ dependencies, pure Node — works in any project, any language.
 **Instalar no SEU projeto** (não sobrescreve nada, funde o `settings.json` que você já tem):
 
 ```bash
-git clone https://github.com/SEU-USUARIO/claude-mind.git
+git clone https://github.com/flaviolimadev/claude-mind.git
 cd claude-mind
 node scripts/install.mjs /caminho/do/seu/projeto
 ```
@@ -80,7 +80,8 @@ hooks — o harness os executa, não o assistente (ver `memory/os-hooks.md`):
 | `Stop` | ao fechar o turno | roda o verificador e, **com desvio, devolve exit 2** — o assistente continua até consertar (com trava anti-laço) |
 
 Já vêm ligados em `.claude/settings.json`. Sem eles a memória existe mas ninguém lê, e o verificador
-só roda quando alguém lembra.
+só roda quando alguém lembra. Os três hooks são Node puro (sem bash) — rodam igual em macOS, Linux
+e Windows.
 
 O fluxo que os hooks impõem:
 

@@ -28,7 +28,7 @@ const copy = (rel, transform) => {
   let body = fs.readFileSync(from);
   if (transform) body = Buffer.from(transform(body.toString('utf8')));
   fs.writeFileSync(to, body);
-  if (rel.endsWith('.sh') || rel.endsWith('.mjs')) fs.chmodSync(to, 0o755);
+  if (rel.endsWith('.sh') || rel.endsWith('.mjs') || rel.startsWith('.githooks/')) fs.chmodSync(to, 0o755);
   criados++; console.log(`  + ${rel}`);
 };
 
@@ -37,7 +37,7 @@ console.log(`\ninstalando claude-mind em ${dst}\n`);
 // scripts, hooks e viewer vão inteiros
 for (const f of ['scripts/check.mjs', 'scripts/log.mjs', 'scripts/install.mjs',
                  'viewer/server.mjs', 'viewer/index.html',
-                 '.claude/hooks/mind-load.sh', '.claude/hooks/mind-remind.sh', '.claude/hooks/mind-verify.sh',
+                 '.claude/hooks/mind-load.mjs', '.claude/hooks/mind-remind.mjs', '.claude/hooks/mind-verify.mjs',
                  '.githooks/post-commit']) copy(f);
 
 // agentes meta + memória-base (os agentes de DOMÍNIO são do seu projeto, não vêm de exemplo)

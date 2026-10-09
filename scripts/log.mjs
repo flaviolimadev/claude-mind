@@ -13,7 +13,7 @@ const [, , agent, type, ...rest] = process.argv;
 const summary = rest.join(' ').trim();
 if (!agent || !type || !summary) {
   console.error('uso: node scripts/log.mjs <agente> <tipo> "<resumo>"');
-  process.exit(0);
+  process.exit(1);
 }
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const file = path.join(root, 'memory', '.activity.jsonl');

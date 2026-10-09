@@ -12,6 +12,7 @@ import { fileURLToPath } from 'node:url';
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(here, '..');
 const PORT = process.env.PORT || 4173;
+const HOST = process.env.HOST || '127.0.0.1'; // ferramenta local: não expõe o grafo na rede
 const R = (p) => { try { return fs.readFileSync(path.join(root, p), 'utf8'); } catch { return ''; } };
 const ls = (d) => { try { return fs.readdirSync(path.join(root, d)); } catch { return []; } };
 
@@ -44,7 +45,8 @@ const send = (res, ev, data) => res.write(`event: ${ev}\ndata: ${JSON.stringify(
 
 // observa os arquivos e avisa os clientes (debounced)
 let timer = null;
-const watch = (dir) => { try { fs.watch(path.join(root, dir), { recursive: true }, () => { clearTimeout(timer); timer = setTimeout(() => { for (const c of clients) send(c, 'reload', { t: Date.now() }); }, 150); }); } catch {} };
+// sem { recursive } de propósito: os diretórios são rasos e o watch recursivo falha no Node 18/Linux
+const watch = (dir) => { try { fs.watch(path.join(root, dir), () => { clearTimeout(timer); timer = setTimeout(() => { for (const c of clients) send(c, 'reload', { t: Date.now() }); }, 150); }); } catch {} };
 watch('.claude/agents'); watch('memory'); try { fs.watch(path.join(root, 'catalog.json'), () => { clearTimeout(timer); timer = setTimeout(() => { for (const c of clients) send(c, 'reload', {}); }, 150); }); } catch {}
 
 http.createServer((req, res) => {
@@ -55,4 +57,4 @@ http.createServer((req, res) => {
   }
   res.writeHead(200, { 'content-type': 'text/html; charset=utf-8' });
   res.end(R('viewer/index.html'));
-}).listen(PORT, () => console.log(`\n  claude-mind viewer  →  http://localhost:${PORT}\n  (edite os arquivos e veja o grafo atualizar ao vivo)\n`));
+}).listen(PORT, HOST, () => console.log(`\n  claude-mind viewer  →  http://localhost:${PORT}\n  (edite os arquivos e veja o grafo atualizar ao vivo)\n`));

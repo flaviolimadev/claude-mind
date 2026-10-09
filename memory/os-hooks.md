@@ -10,15 +10,19 @@ executa hook é o harness (não o assistente), o loop vive em `.claude/settings.
 
 | Hook | Script | O que faz |
 |---|---|---|
-| `SessionStart` | `.claude/hooks/mind-load.sh` | injeta `memory/MEMORY.md` inteiro + os donos por domínio, uma vez por sessão; avisa se a sessão anterior deixou desvio |
-| `UserPromptSubmit` | `.claude/hooks/mind-remind.sh` | a CADA mensagem, injeta o protocolo: rotear pelo dispatcher antes de agir; depois de entregar → memória, agente novo se faltou dono, `log.mjs`, `check.mjs` |
-| `Stop` | `.claude/hooks/mind-verify.sh` | roda `check.mjs` antes de encerrar o turno; **com desvio devolve exit 2** e o assistente continua até consertar |
+| `SessionStart` | `.claude/hooks/mind-load.mjs` | injeta `memory/MEMORY.md` inteiro + os donos por domínio, uma vez por sessão; avisa se a sessão anterior deixou desvio |
+| `UserPromptSubmit` | `.claude/hooks/mind-remind.mjs` | a CADA mensagem, injeta o protocolo: rotear pelo dispatcher antes de agir; depois de entregar → memória, agente novo se faltou dono, `log.mjs`, `check.mjs` |
+| `Stop` | `.claude/hooks/mind-verify.mjs` | roda `check.mjs` antes de encerrar o turno; **com desvio devolve exit 2** e o assistente continua até consertar |
 
 **Por que a divisão:** o conteúdo pesado (índice de memória) entra uma vez no SessionStart; o
 lembrete do UserPromptSubmit é curto de propósito, para não inflar o contexto a cada mensagem.
 
-**Proteção anti-laço:** o `Stop` lê `stop_hook_active` do payload — na segunda passada sai com 0 em
-vez de bloquear de novo, então nunca entra em loop infinito.
+**Proteção anti-laço:** o `Stop` lê `stop_hook_active` do payload (via `JSON.parse`, que aguenta
+qualquer formatação) — na segunda passada sai com 0 em vez de bloquear de novo, então nunca entra
+em loop infinito.
+
+**Portáteis por construção:** os três hooks são Node puro — sem bash — e resolvem os caminhos por
+`CLAUDE_PROJECT_DIR`, então rodam igual em macOS, Linux e Windows.
 
 **Sem os hooks, a estrutura vira documentação morta:** a memória existe mas ninguém lê, e o
 verificador só roda quando alguém lembra. Ver [[the-loop]], [[the-check]].
