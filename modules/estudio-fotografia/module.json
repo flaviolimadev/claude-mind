@@ -1,0 +1,84 @@
+{
+  "key": "estudio-fotografia",
+  "name": "Estúdio · Fotografia & Vídeo",
+  "version": "0.1.0",
+  "verifiedAt": "2026-10-11",
+  "description": "Estúdio de edição profissional: culling por nitidez, correção de cor antes do grade, retoque IA com fidelidade (Higgsfield), álbuns PDF temáticos e vídeos replicando referências (incl. zoom-through estilo Wedding Slides). Destilado do projeto Ensaio da Gabi / Ismael.",
+  "agents": [
+    {
+      "key": "estudio",
+      "name": "Estúdio",
+      "type": "domain",
+      "parent": null,
+      "color": "#C96A8E",
+      "description": "Dono de projetos de foto e vídeo: recebe fotos + título + referências visuais e entrega seleção, edições, cortes sociais, álbum PDF e vídeos. Orquestra os subs na ordem do workflow e faz QA visual de cada etapa.",
+      "memory": [
+        "estudio-workflow.md"
+      ]
+    },
+    {
+      "key": "estudio-curador",
+      "name": "Estúdio · Curador",
+      "type": "sub",
+      "parent": "estudio",
+      "color": "#C96A8E",
+      "description": "Culling profissional: nitidez por Laplaciano, agrupamento de duplicadas, contact sheets para decisão visual, melhores por cena. Nunca deleta originais — move para duplicadas/.",
+      "memory": [
+        "estudio-culling.md"
+      ]
+    },
+    {
+      "key": "estudio-colorista",
+      "name": "Estúdio · Colorista",
+      "type": "sub",
+      "parent": "estudio",
+      "color": "#C98E6A",
+      "description": "Correção de cor e grades locais (PIL+numpy): WB gray-world, film look com grão/halation/matte, paleta casada com o figurino. Correção SEMPRE antes do grade estilizado.",
+      "memory": [
+        "estudio-cor-e-grade.md"
+      ]
+    },
+    {
+      "key": "estudio-retocador",
+      "name": "Estúdio · Retocador IA",
+      "type": "sub",
+      "parent": "estudio",
+      "color": "#8E6AC9",
+      "description": "Higgsfield via MCP: enhancement com prompt de fidelidade rígida (sem cara de IA), artes compostas, upscale 4K, imagem-para-vídeo. Conhece custos, fluxo de upload e as armadilhas (presets interceptando, uploads 000).",
+      "memory": [
+        "estudio-higgsfield.md"
+      ]
+    },
+    {
+      "key": "estudio-motion",
+      "name": "Estúdio · Motion",
+      "type": "sub",
+      "parent": "estudio",
+      "color": "#6AB0C9",
+      "description": "Vídeos e slideshows renderizados localmente (PIL→ffmpeg rawvideo): Ken Burns, 2D temático e o zoom-through contínuo estilo Wedding Slides. Replica referências fazendo engenharia reversa frame a frame.",
+      "memory": [
+        "estudio-videos.md"
+      ]
+    },
+    {
+      "key": "estudio-diagramador",
+      "name": "Estúdio · Diagramador",
+      "type": "sub",
+      "parent": "estudio",
+      "color": "#8AC96A",
+      "description": "Álbum PDF temático (capa com nome, fundos aquarela da própria foto, duplas inclinadas, seção escura) e cortes 4:5/9:16 com enquadramento por foto protegendo rostos e mãos.",
+      "memory": [
+        "estudio-album-e-cortes.md"
+      ]
+    }
+  ],
+  "memory": [
+    "estudio-workflow.md",
+    "estudio-culling.md",
+    "estudio-cor-e-grade.md",
+    "estudio-higgsfield.md",
+    "estudio-videos.md",
+    "estudio-album-e-cortes.md",
+    "estudio-caso-ismael.md"
+  ]
+}

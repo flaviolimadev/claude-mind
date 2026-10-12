@@ -87,6 +87,7 @@ npx @flaviolimadev/claude-mind add deploy-easypanel
 | `dev-node` | Node.js: ESM vs CJS sem tropeço, `process.env` é sempre string, scripts npm como interface, critério antes de toda dependência. |
 | `dev-php` | PHP/Laravel: FormRequest e controller enxuto, N+1 (incl. MorphTo), `env()` nulo com config cacheada, sequência de release. |
 | `dev-postgres` | Postgres: migration sem lock em tabela viva, índice guiado por EXPLAIN (FK não ganha índice sozinha), timestamptz e numeric. |
+| `estudio-fotografia` | Estúdio de foto & vídeo: culling por nitidez, correção antes do grade, retoque IA fiel (Higgsfield), álbum PDF temático e vídeos replicando referências (zoom-through "Wedding Slides"). |
 
 Os três `dev-*` compartilham o domínio-pai `dev` — instale um ou os três, a hierarquia se monta
 sozinha. Cada módulo traz o domínio + subs pro `catalog.json`, os `.md` dos agentes e memórias com

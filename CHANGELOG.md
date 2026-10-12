@@ -3,6 +3,16 @@
 Todas as mudanças relevantes do claude-mind, da mais nova pra mais antiga.
 Nas aulas e tutoriais, referencie a versão (tag) — assim o material não quebra quando o projeto evoluir.
 
+## [0.5.0] — 2026-10-12
+
+### Adicionado
+- **Módulo `estudio-fotografia`** — primeiro setor criativo: estúdio completo de edição de fotos
+  e vídeos destilado de um projeto real (ensaio gestante "Ismael"). Domínio `estudio` + 5 subs
+  (curador, colorista, retocador IA, motion, diagramador), 7 memórias (workflow, culling por
+  Laplaciano, correção-antes-do-grade + film look, manual operacional do Higgsfield MCP, 3
+  receitas de vídeo incl. zoom-through "Wedding Slides", álbum PDF temático, case fundador) e 9
+  pipelines Python prontos (PIL+numpy+ffmpeg, sem Lightroom/After Effects).
+
 ## [0.4.0] — 2026-10-09
 
 ### Adicionado
