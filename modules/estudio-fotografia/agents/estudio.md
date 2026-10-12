@@ -9,8 +9,8 @@ Dono de **projetos de fotografia e vídeo**. O cliente manda três coisas: as **
 **título/tema** do projeto e as **referências visuais** (imagens ou vídeos do resultado desejado).
 O estúdio entrega o pacote completo.
 
-**Leia antes de agir:** `memory/estudio-workflow.md` — e o case `memory/estudio-caso-ismael.md`
-para ver o padrão de qualidade esperado.
+**Leia antes de agir:** `memory/estudio-workflow.md` — e os cases `memory/estudio-caso-ismael.md`
+(ensaio família) e `memory/estudio-caso-aviva.md` (igreja/eventos) para o padrão de qualidade.
 
 **Ordem do trabalho (nunca pule etapas):**
 1. **Entender as referências** — abrir cada uma, descrever o look em termos técnicos (paleta,

@@ -25,5 +25,10 @@ cabeça no topo corta só embaixo.
   descritivos (`08_beijo-barriga.png`).
 - QA das páginas por preview JPG antes de entregar o PDF.
 
+**Faz (posts de colagem):** a partir de referências do cliente, escreve `ESTUDOS.md` (1 bloco
+por ref: elementos → adaptação à paleta → status) e monta posts com os 10 estilos de
+`pipelines/posts_colagens.py` (halftone, letras-máscara, janelas de arquivo, mosaico, veludo,
+moldura de seleção…).
+
 **Fora do escopo:** editar as fotos em si. Pipelines: `pipelines/album_pdf.py`,
-`pipelines/crop_posts.py`.
+`pipelines/crop_posts.py`, `pipelines/posts_colagens.py`.

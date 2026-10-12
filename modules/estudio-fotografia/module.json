@@ -1,8 +1,8 @@
 {
   "key": "estudio-fotografia",
   "name": "Estúdio · Fotografia & Vídeo",
-  "version": "0.1.0",
-  "verifiedAt": "2026-10-11",
+  "version": "0.2.0",
+  "verifiedAt": "2026-10-12",
   "description": "Estúdio de edição profissional: culling por nitidez, correção de cor antes do grade, retoque IA com fidelidade (Higgsfield), álbuns PDF temáticos e vídeos replicando referências (incl. zoom-through estilo Wedding Slides). Destilado do projeto Ensaio da Gabi / Ismael.",
   "agents": [
     {
@@ -13,7 +13,8 @@
       "color": "#C96A8E",
       "description": "Dono de projetos de foto e vídeo: recebe fotos + título + referências visuais e entrega seleção, edições, cortes sociais, álbum PDF e vídeos. Orquestra os subs na ordem do workflow e faz QA visual de cada etapa.",
       "memory": [
-        "estudio-workflow.md"
+        "estudio-workflow.md",
+        "estudio-caso-aviva.md"
       ]
     },
     {
@@ -66,7 +67,7 @@
       "type": "sub",
       "parent": "estudio",
       "color": "#8AC96A",
-      "description": "Álbum PDF temático (capa com nome, fundos aquarela da própria foto, duplas inclinadas, seção escura) e cortes 4:5/9:16 com enquadramento por foto protegendo rostos e mãos.",
+      "description": "Álbum PDF temático (capa com nome, fundos aquarela da própria foto, duplas inclinadas, seção escura) e cortes 4:5/9:16 com enquadramento por foto protegendo rostos e mãos. Tambem domina 10 estilos de colagem para posts (pipelines/posts_colagens.py) a partir de estudo de referencias (ESTUDOS.md).",
       "memory": [
         "estudio-album-e-cortes.md"
       ]
@@ -79,6 +80,7 @@
     "estudio-higgsfield.md",
     "estudio-videos.md",
     "estudio-album-e-cortes.md",
-    "estudio-caso-ismael.md"
+    "estudio-caso-ismael.md",
+    "estudio-caso-aviva.md"
   ]
 }
