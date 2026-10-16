@@ -1,0 +1,92 @@
+{
+  "key": "loja-catalogo",
+  "name": "Loja · Catálogo com WhatsApp",
+  "version": "0.1.0",
+  "verifiedAt": "2026-10-16",
+  "description": "Especialista em criar e evoluir lojas-catálogo de qualquer segmento: vitrine mobile-first (Vite+React) com WhatsApp como checkout, painel admin (Node+Postgres) com estoque, custo congelado, venda à vista/a prazo, a receber e relatórios, prévia de link, fotos fiéis e publicação no EasyPanel. Destilado da loja Chronos Lab (relógios).",
+  "agents": [
+    {
+      "key": "loja",
+      "name": "Loja",
+      "type": "domain",
+      "parent": null,
+      "color": "#EC6A3A",
+      "description": "Dono de criar e evoluir lojas-catálogo (vitrine + admin + WhatsApp como checkout) para qualquer segmento. Recebe nome, segmento, número de WhatsApp, cidades e produtos; entrega a loja no ar. Orquestra os subs na ordem do checklist e nunca mexe em dado ao vivo sem confirmação.",
+      "memory": [
+        "loja-blueprint.md",
+        "loja-nova-loja-checklist.md",
+        "loja-caso-chronoslab.md"
+      ]
+    },
+    {
+      "key": "loja-vitrine",
+      "name": "Loja · Vitrine",
+      "type": "sub",
+      "parent": "loja",
+      "color": "#EC6A3A",
+      "description": "Especialização da loja: a vitrine pública — cards, página do produto, filtros, sacola e mensagens prontas de WhatsApp, lupa/zoom, pacote de conversão (última unidade, economia à vista, barra com preço, banners com destino) e prévia de link (Open Graph).",
+      "memory": [
+        "loja-vitrine-conversao.md",
+        "loja-previa-link.md"
+      ]
+    },
+    {
+      "key": "loja-admin",
+      "name": "Loja · Admin",
+      "type": "sub",
+      "parent": "loja",
+      "color": "#C9A96A",
+      "description": "Especialização da loja: o painel e o financeiro — produtos com custo, entradas e vendas (estoque = Σentradas − Σvendas, custo congelado na venda), venda a prazo com parcelas e página A Receber, clientes, relatórios por produto/período, workflow por categoria e plano de investimento.",
+      "memory": [
+        "loja-admin-estoque-e-financeiro.md",
+        "loja-dados-ao-vivo.md"
+      ]
+    },
+    {
+      "key": "loja-dados",
+      "name": "Loja · Dados",
+      "type": "sub",
+      "parent": "loja",
+      "color": "#8AC96A",
+      "description": "Especialização da loja: importar e migrar dados — catálogo de planilha/markdown, histórico de sistema antigo, contatos do WhatsApp — validando a fonte antes, mantendo o estoque do dono como verdade, com log pra desfazer e nunca apagando dado ao vivo sem confirmação.",
+      "memory": [
+        "loja-migracao-de-dados.md",
+        "loja-dados-ao-vivo.md"
+      ]
+    },
+    {
+      "key": "loja-midia",
+      "name": "Loja · Mídia",
+      "type": "sub",
+      "parent": "loja",
+      "color": "#B06AC9",
+      "description": "Especialização da loja: fotos e vídeos de produto — revelação fiel de RAW (balanço de branco por cartão de cinza, exposição com ombro suave), recorte quadrado 2000 px, ordem de upload, imagem de prévia 800 px e vídeo curto 9:16 via Higgsfield.",
+      "memory": [
+        "loja-fotos-de-produto.md"
+      ]
+    },
+    {
+      "key": "loja-publicacao",
+      "name": "Loja · Publicação",
+      "type": "sub",
+      "parent": "loja",
+      "color": "#7F8AC9",
+      "description": "Especialização da loja: pôr a loja no ar no EasyPanel — três serviços (vitrine nginx, admin Node, Postgres), nginx por template com envsubst e upstream interno, volume de uploads, https atrás do Traefik, deploy automático por push e diagnóstico de queda.",
+      "memory": [
+        "loja-deploy-easypanel.md"
+      ]
+    }
+  ],
+  "memory": [
+    "loja-blueprint.md",
+    "loja-nova-loja-checklist.md",
+    "loja-caso-chronoslab.md",
+    "loja-vitrine-conversao.md",
+    "loja-previa-link.md",
+    "loja-admin-estoque-e-financeiro.md",
+    "loja-dados-ao-vivo.md",
+    "loja-migracao-de-dados.md",
+    "loja-fotos-de-produto.md",
+    "loja-deploy-easypanel.md"
+  ]
+}

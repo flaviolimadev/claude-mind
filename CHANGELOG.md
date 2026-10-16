@@ -3,6 +3,17 @@
 Todas as mudanças relevantes do claude-mind, da mais nova pra mais antiga.
 Nas aulas e tutoriais, referencie a versão (tag) — assim o material não quebra quando o projeto evoluir.
 
+## [0.6.0] — 2026-10-16
+
+### Adicionado
+- **Módulo `loja-catalogo`** — primeiro setor de negócio: especialista em **criar lojas-catálogo**
+  de qualquer segmento, destilado da loja Chronos Lab (relógios, Natal/RN). Domínio `loja` + 5
+  subs (vitrine, admin, dados, mídia, publicação) e 10 memórias: arquitetura (vitrine Vite+React
+  + admin Node/Postgres + WhatsApp como checkout), checklist de loja nova, pacote de conversão,
+  prévia de link atrás do Traefik, estoque/custo congelado/venda a prazo/A Receber, dados ao vivo
+  (nunca apagar sem confirmar), migração de sistema antigo, fotos fiéis de RAW (+ pipeline
+  `revelar_raw.py`), deploy no EasyPanel e o caso fundador.
+
 ## [0.5.0] — 2026-10-12
 
 ### Adicionado

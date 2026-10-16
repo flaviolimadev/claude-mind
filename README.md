@@ -88,6 +88,7 @@ npx @flaviolimadev/claude-mind add deploy-easypanel
 | `dev-php` | PHP/Laravel: FormRequest e controller enxuto, N+1 (incl. MorphTo), `env()` nulo com config cacheada, sequência de release. |
 | `dev-postgres` | Postgres: migration sem lock em tabela viva, índice guiado por EXPLAIN (FK não ganha índice sozinha), timestamptz e numeric. |
 | `estudio-fotografia` | Estúdio de foto & vídeo: culling por nitidez, correção antes do grade, retoque IA fiel (Higgsfield), álbum PDF temático e vídeos replicando referências (zoom-through "Wedding Slides"). |
+| `loja-catalogo` | Especialista em criação de lojas-catálogo de qualquer segmento: vitrine mobile-first com WhatsApp como checkout, admin com estoque/custo congelado/venda a prazo/A Receber/relatórios, prévia de link, fotos fiéis de RAW e publicação no EasyPanel — destilado da loja Chronos Lab. |
 
 Os três `dev-*` compartilham o domínio-pai `dev` — instale um ou os três, a hierarquia se monta
 sozinha. Cada módulo traz o domínio + subs pro `catalog.json`, os `.md` dos agentes e memórias com
