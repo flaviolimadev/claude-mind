@@ -39,7 +39,8 @@
       "description": "Especialização da loja: o painel e o financeiro — produtos com custo, entradas e vendas (estoque = Σentradas − Σvendas, custo congelado na venda), venda a prazo com parcelas e página A Receber, clientes, relatórios por produto/período, workflow por categoria e plano de investimento.",
       "memory": [
         "loja-admin-estoque-e-financeiro.md",
-        "loja-dados-ao-vivo.md"
+        "loja-dados-ao-vivo.md",
+        "loja-equipe-no-admin.md"
       ]
     },
     {
@@ -87,6 +88,7 @@
     "loja-dados-ao-vivo.md",
     "loja-migracao-de-dados.md",
     "loja-fotos-de-produto.md",
-    "loja-deploy-easypanel.md"
+    "loja-deploy-easypanel.md",
+    "loja-equipe-no-admin.md"
   ]
 }

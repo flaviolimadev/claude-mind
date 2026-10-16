@@ -29,6 +29,7 @@ Os filtros da vitrine nascem dos valores existentes — valor novo vira opção 
 - A vitrine recebe `soldOut` e `lastUnit`, nunca a quantidade de estoque.
 - `active=false` esconde da vitrine mas mantém histórico e relatórios (é assim que o passado fica).
 - Nome da loja, número, cidades e parcelas vêm do admin (`settings`), nunca fixos no código.
+- O painel mostra a própria equipe de agentes da loja em **Equipe** (ver [[loja-equipe-no-admin]]).
 
 Ver [[loja-nova-loja-checklist]] (ordem de criação), [[loja-admin-estoque-e-financeiro]]
 (as contas), [[loja-deploy-easypanel]] (no ar).
