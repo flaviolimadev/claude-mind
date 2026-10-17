@@ -40,7 +40,7 @@ def wb_gains(lin16, box):
 def develop(lin16, gR, gB, target=0.86, knee=0.80, contrast=0.18, ev_clamp=(1.0, 30.0)):
     f = lin16.astype(np.float32) / 65535
     f *= np.array([gR, 1.0, gB], np.float32)                      # balanço de branco
-    luma = f @ LUMA
+    luma = f[..., 0] * LUMA[0] + f[..., 1] * LUMA[1] + f[..., 2] * LUMA[2]
     g = float(np.clip(target / max(1e-6, np.percentile(luma, 98.0)), *ev_clamp))  # p98 → 0.86 linear
     f *= g
     hi = f > knee                                                  # ombro suave: brilho do metal não estoura
