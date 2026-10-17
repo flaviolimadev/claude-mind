@@ -62,4 +62,19 @@ teste aprovada antes do lote (duas rodadas foram perdidas: orientação e tom ve
 - Relógio sem cadastro → **rascunho oculto** (`active=false`, preço 0, nota com a origem) com as
   fotos, pro dono só pôr preço/linha/estoque; nunca inventar preço. Fotos antigas do dono ficam no fim.
 
+**Marca d'água anti-cópia (2026-10-17):** o dono quer o logo nas fotos pra ninguém clonar, "sem
+atrapalhar a visualização". Receita (pipeline `marca_dagua.py`), duas camadas:
+- **Selo no canto** inferior direito: o logo da loja em **branco a ~73%**, tamanho **16,5% da largura**,
+  margem 3,8%, com **sombra suave** (logo preto, blur ~1,8% do selo, alpha ~59%) atrás — a sombra é o
+  que faz ler em caixa creme/almofada branca; o branco é o que faz ler em veludo/fundo escuro. Sem a
+  sombra, some no fundo claro.
+- **Camada diagonal cobrindo tudo**: o nome da loja repetido a −28°, fonte 2% da largura, **branco a
+  ~5% (alpha 13/255)**. É o que impede clonar recortando o canto, e a 5% não atrapalha o olhar. Tiles
+  alternados (deslocamento meia-coluna nas linhas ímpares) num quadro (W+H)² girado e recortado em W×H,
+  então serve retrato e quadrado.
+- **Aplicar em TODAS as fotos reais** (profissionais + as do próprio dono): baixa do servidor, marca,
+  sobe as versões marcadas e refaz a ordem (as originais saem do volume) — a capa marcada vira a prévia
+  de link também. Relativo à largura, então adapta a qualquer proporção. Rodar UMA vez (log com resume
+  por relógio pra não marcar duas vezes). Fonte do selo: geométrica bold (Futura) combina com o emblema.
+
 Ver [[loja-vitrine-conversao]] (zoom), [[loja-previa-link]].
