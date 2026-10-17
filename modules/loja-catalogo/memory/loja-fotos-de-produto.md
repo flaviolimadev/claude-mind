@@ -45,6 +45,18 @@ teste aprovada antes do lote (duas rodadas foram perdidas: orientação e tom ve
   blur gaussiano 10, margens de 6–8% ignoradas, pico = centro; lado = 0,78×min(W,H); ≈ 97% certo.
   Os 3% restantes (dobradiça de caixa, texto do estojo) saem na prancha de revisão → centro manual em
   fração do quadro revelado (`drive/centers_manual.json`) e refaz só esses.
+- **Identificar antes de atribuir, com zoom no mostrador** — a miniatura engana: "Santos preto" era o
+  Santos-Dumont (sem data, sem AUTOMATIC) e não o Santos de Cartier (data às 6, AUTOMATIC); o
+  "Speedmaster dourado" tinha MICHAEL KORS escrito no mostrador. Prancha obrigatória: capa do dono ×
+  recorte 1000 px de cada quadro novo, produto por produto, antes de subir.
+- **Recorte centralizado com zoom (pedido do dono):** Hough de círculos no quadro revelado reduzido a
+  1200 px (raio 11–27% do lado menor, param2 34→28→22), escolhendo o círculo mais perto do pico de
+  detalhe; lado = 2r×1,55 (mín. 40% do lado menor), encolhido se preciso pra manter o centro. Acertou
+  ~90%; o resto (pulseira dominante, fundo de caixa) lê-se numa prancha com **grade de 0,1** sobre o
+  quadro inteiro — estimar fração "no olho" a partir de miniatura em célula com margem erra feio.
+  Caixa quadrada (Santos, Panthère) o Hough ainda acha o aro interno; serviu.
+- Cache dos quadros revelados em JPEG q94 (`drive/full/`) deixa refazer recortes em segundos sem
+  redecodificar o RAW (9 s/quadro).
 - `luma = f @ LUMA` em float32 num array 6024×4024 disparou overflow no BLAS do macOS: usar soma
   explícita por canal (corrigido no `revelar_raw.py`).
 - Relógio sem cadastro → **rascunho oculto** (`active=false`, preço 0, nota com a origem) com as
