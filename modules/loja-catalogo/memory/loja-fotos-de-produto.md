@@ -77,4 +77,6 @@ atrapalhar a visualização". Receita (pipeline `marca_dagua.py`), duas camadas:
   de link também. Relativo à largura, então adapta a qualquer proporção. Rodar UMA vez (log com resume
   por relógio pra não marcar duas vezes). Fonte do selo: geométrica bold (Futura) combina com o emblema.
 
+**Logo central por CSS — testada e REMOVIDA (2026-10-17):** o dono pediu a logo no centro via CSS (`.brand-wm` no produto, `.zv-wm` no zoom, asset `public/logo-wm.png`); ao ver, achou "horrível" e mandou tirar — a logo grande no meio tapa o mostrador e polui. **Lição:** no meio da foto a marca atrapalha; o lugar dela é o canto. Ficou só a marca d'água GRAVADA (selo no canto + diagonal sutil), que é o que protege. Overlay CSS, de qualquer forma, nunca protege (o arquivo sai limpo). Antes de encher a vitrine de marca, lembrar: sutil e no canto.
+
 Ver [[loja-vitrine-conversao]] (zoom), [[loja-previa-link]].

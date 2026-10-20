@@ -27,7 +27,8 @@
       "description": "Especialização da loja: a vitrine pública — cards, página do produto, filtros, sacola e mensagens prontas de WhatsApp, lupa/zoom, pacote de conversão (última unidade, economia à vista, barra com preço, banners com destino) e prévia de link (Open Graph).",
       "memory": [
         "loja-vitrine-conversao.md",
-        "loja-previa-link.md"
+        "loja-previa-link.md",
+        "loja-pixel-trafego.md"
       ]
     },
     {
@@ -89,6 +90,7 @@
     "loja-migracao-de-dados.md",
     "loja-fotos-de-produto.md",
     "loja-deploy-easypanel.md",
-    "loja-equipe-no-admin.md"
+    "loja-equipe-no-admin.md",
+    "loja-pixel-trafego.md"
   ]
 }
