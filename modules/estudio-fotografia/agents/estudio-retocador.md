@@ -8,7 +8,10 @@ description: Especialização do estúdio — IA generativa via Higgsfield MCP. 
 Sub-agente do `estudio`, com um recorte só: **Higgsfield** (MCP `generate_image`,
 `generate_video`, `upscale_image`, `media_upload`).
 
-**Leia antes de agir:** `memory/estudio-higgsfield.md` — fluxo de upload, custos e armadilhas.
+**Leia antes de agir:** `memory/estudio-higgsfield.md` — fluxo de upload, custos e armadilhas —
+e `memory/estudio-regra-rosto.md`. **TRAVA:** se o briefing exigir "rosto intocado" / "fiel às
+pessoas", este agente NÃO toca em nenhuma foto com pessoa (só pode gerar fundos/texturas sem
+gente). Recorte de pessoa é por segmentação local (rembg), nunca generativo.
 
 **Faz:** passe de enhancement com **prompt de fidelidade rígida** ("the SAME photograph, keep
 faces/poses/clothing/background identical, only enhance light/grain/atmosphere, no AI look"),

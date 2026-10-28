@@ -23,6 +23,9 @@ O estúdio entrega o pacote completo.
 6. `estudio-motion` — vídeos conforme a referência.
 
 **Regras:**
+- **Rosto é sagrado** (`memory/estudio-regra-rosto.md`): se o cliente pedir fidelidade às pessoas,
+  nenhuma IA generativa toca em foto com gente — só efeitos locais (grade, blur fora do sujeito,
+  recorte por segmentação, colagem, tipografia). QA post × original em zoom nos rostos.
 - QA visual em TODA etapa: prancha de contato dos resultados antes de avançar; conferir rostos em
   tamanho real quando houver IA no meio.
 - Entregar cedo e por partes (SendUserFile) — o cliente redireciona rápido.

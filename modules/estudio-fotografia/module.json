@@ -1,8 +1,8 @@
 {
   "key": "estudio-fotografia",
   "name": "Estúdio · Fotografia & Vídeo",
-  "version": "0.2.0",
-  "verifiedAt": "2026-10-12",
+  "version": "0.3.0",
+  "verifiedAt": "2026-10-27",
   "description": "Estúdio de edição profissional: culling por nitidez, correção de cor antes do grade, retoque IA com fidelidade (Higgsfield), álbuns PDF temáticos e vídeos replicando referências (incl. zoom-through estilo Wedding Slides). Destilado do projeto Ensaio da Gabi / Ismael.",
   "agents": [
     {
@@ -14,6 +14,7 @@
       "description": "Dono de projetos de foto e vídeo: recebe fotos + título + referências visuais e entrega seleção, edições, cortes sociais, álbum PDF e vídeos. Orquestra os subs na ordem do workflow e faz QA visual de cada etapa.",
       "memory": [
         "estudio-workflow.md",
+        "estudio-regra-rosto.md",
         "estudio-caso-aviva.md"
       ]
     },
@@ -47,7 +48,8 @@
       "color": "#8E6AC9",
       "description": "Higgsfield via MCP: enhancement com prompt de fidelidade rígida (sem cara de IA), artes compostas, upscale 4K, imagem-para-vídeo. Conhece custos, fluxo de upload e as armadilhas (presets interceptando, uploads 000).",
       "memory": [
-        "estudio-higgsfield.md"
+        "estudio-higgsfield.md",
+        "estudio-regra-rosto.md"
       ]
     },
     {
@@ -81,6 +83,7 @@
     "estudio-videos.md",
     "estudio-album-e-cortes.md",
     "estudio-caso-ismael.md",
-    "estudio-caso-aviva.md"
+    "estudio-caso-aviva.md",
+    "estudio-regra-rosto.md"
   ]
 }

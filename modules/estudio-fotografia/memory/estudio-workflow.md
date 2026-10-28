@@ -14,6 +14,9 @@ metadata:
 2. **Culling** (`estudio-curador`) → melhores por cena; rejeitadas em `duplicadas/` (JPG+RAW).
 3. **Cor** (`estudio-colorista`) → correção natural PRIMEIRO, grade estilizado DEPOIS.
 4. **IA** (`estudio-retocador`) → passe de fidelidade Higgsfield + upscale 4K (checar créditos).
+   **CONDICIONAL:** se o cliente exigir "rosto intocado" ([[estudio-regra-rosto]]), pular esta
+   etapa para fotos com pessoas — efeitos só locais (PIL): grade, grão, blur em máscara fora do
+   sujeito, recorte por segmentação (rembg), colagem e tipografia.
 5. **Diagramação** (`estudio-diagramador`) → `album_final/` numerado, PDF, cortes 4:5/9:16.
 6. **Motion** (`estudio-motion`) → vídeo(s) replicando a referência.
 
