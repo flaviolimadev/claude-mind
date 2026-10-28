@@ -1,9 +1,9 @@
 {
   "key": "estudio-fotografia",
   "name": "Estúdio · Fotografia & Vídeo",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "verifiedAt": "2026-10-28",
-  "description": "Estúdio de edição profissional: culling por nitidez, revelação fiel à câmera (RAW casado com o JPG da Canon) e correção de cor antes do grade, retoque IA com fidelidade (Higgsfield) só quando o cliente permite, álbuns PDF temáticos e vídeos replicando referências (incl. zoom-through estilo Wedding Slides). Destilado dos projetos Ensaio da Gabi / Ismael, ChronosLab e Mocidade Betfage.",
+  "description": "Estúdio de edição profissional: culling por nitidez, revelação fiel à câmera (RAW casado com o JPG da Canon), enquadramento por rosto (Vision nativo), efeitos por camadas IA em fundo preto (foto intacta), posts a partir de referências na paleta do cliente, álbuns PDF temáticos e vídeos replicando referências. Destilado dos projetos Ensaio da Gabi / Ismael, ChronosLab e Mocidade Betfage.",
   "agents": [
     {
       "key": "estudio",
@@ -17,7 +17,9 @@
         "estudio-regra-rosto.md",
         "estudio-revelar-fiel-camera.md",
         "estudio-caso-aviva.md",
-        "estudio-hibrido-cenario.md"
+        "estudio-hibrido-cenario.md",
+        "estudio-rostos-vision.md",
+        "estudio-efeitos-camada-ia.md"
       ]
     },
     {
@@ -53,7 +55,9 @@
       "memory": [
         "estudio-higgsfield.md",
         "estudio-regra-rosto.md",
-        "estudio-hibrido-cenario.md"
+        "estudio-hibrido-cenario.md",
+        "estudio-rostos-vision.md",
+        "estudio-efeitos-camada-ia.md"
       ]
     },
     {
@@ -75,7 +79,9 @@
       "color": "#8AC96A",
       "description": "Álbum PDF temático (capa com nome, fundos aquarela da própria foto, duplas inclinadas, seção escura) e cortes 4:5/9:16 com enquadramento por foto protegendo rostos e mãos. Tambem domina 10 estilos de colagem para posts (pipelines/posts_colagens.py) a partir de estudo de referencias (ESTUDOS.md).",
       "memory": [
-        "estudio-album-e-cortes.md"
+        "estudio-album-e-cortes.md",
+        "estudio-rostos-vision.md",
+        "estudio-efeitos-camada-ia.md"
       ]
     }
   ],
@@ -90,6 +96,8 @@
     "estudio-caso-aviva.md",
     "estudio-regra-rosto.md",
     "estudio-hibrido-cenario.md",
-    "estudio-revelar-fiel-camera.md"
+    "estudio-revelar-fiel-camera.md",
+    "estudio-rostos-vision.md",
+    "estudio-efeitos-camada-ia.md"
   ]
 }
