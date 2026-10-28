@@ -1,9 +1,9 @@
 {
   "key": "estudio-fotografia",
   "name": "Estúdio · Fotografia & Vídeo",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "verifiedAt": "2026-10-28",
-  "description": "Estúdio de edição profissional: culling por nitidez, correção de cor antes do grade, retoque IA com fidelidade (Higgsfield), álbuns PDF temáticos e vídeos replicando referências (incl. zoom-through estilo Wedding Slides). Destilado do projeto Ensaio da Gabi / Ismael.",
+  "description": "Estúdio de edição profissional: culling por nitidez, revelação fiel à câmera (RAW casado com o JPG da Canon) e correção de cor antes do grade, retoque IA com fidelidade (Higgsfield) só quando o cliente permite, álbuns PDF temáticos e vídeos replicando referências (incl. zoom-through estilo Wedding Slides). Destilado dos projetos Ensaio da Gabi / Ismael, ChronosLab e Mocidade Betfage.",
   "agents": [
     {
       "key": "estudio",
@@ -15,6 +15,7 @@
       "memory": [
         "estudio-workflow.md",
         "estudio-regra-rosto.md",
+        "estudio-revelar-fiel-camera.md",
         "estudio-caso-aviva.md",
         "estudio-hibrido-cenario.md"
       ]
@@ -36,9 +37,10 @@
       "type": "sub",
       "parent": "estudio",
       "color": "#C98E6A",
-      "description": "Correção de cor e grades locais (PIL+numpy): WB gray-world, film look com grão/halation/matte, paleta casada com o figurino. Correção SEMPRE antes do grade estilizado.",
+      "description": "Revelação fiel à câmera (histogram-matching do RAW convertido ao JPG da câmera), correção de cor e grades locais (PIL+numpy): WB gray-world, film look com grão/halation/matte, paleta casada com o figurino. Correção SEMPRE antes do grade estilizado; 'natural' = a própria câmera é a régua.",
       "memory": [
-        "estudio-cor-e-grade.md"
+        "estudio-cor-e-grade.md",
+        "estudio-revelar-fiel-camera.md"
       ]
     },
     {
@@ -87,6 +89,7 @@
     "estudio-caso-ismael.md",
     "estudio-caso-aviva.md",
     "estudio-regra-rosto.md",
-    "estudio-hibrido-cenario.md"
+    "estudio-hibrido-cenario.md",
+    "estudio-revelar-fiel-camera.md"
   ]
 }

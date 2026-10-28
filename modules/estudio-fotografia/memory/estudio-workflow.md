@@ -12,7 +12,9 @@ metadata:
 1. **Referências** → abrir cada uma e traduzir em termos técnicos (paleta, contraste, textura,
    elementos, movimento). Vídeo de referência: baixar e fatiar em frames do início ao fim.
 2. **Culling** (`estudio-curador`) → melhores por cena; rejeitadas em `duplicadas/` (JPG+RAW).
-3. **Cor** (`estudio-colorista`) → correção natural PRIMEIRO, grade estilizado DEPOIS.
+3. **Cor** (`estudio-colorista`) → correção natural PRIMEIRO, grade estilizado DEPOIS. Com
+   RAW+JPG da câmera, a base é a revelação fiel à câmera ([[estudio-revelar-fiel-camera]]):
+   a conversão do macOS sai escura/lavada — casar com o JPG da câmera antes de qualquer gosto.
 4. **IA** (`estudio-retocador`) → passe de fidelidade Higgsfield + upscale 4K (checar créditos).
    **CONDICIONAL:** se o cliente exigir "rosto intocado" ([[estudio-regra-rosto]]), pular esta
    etapa para fotos com pessoas — efeitos só locais (PIL): grade, grão, blur em máscara fora do

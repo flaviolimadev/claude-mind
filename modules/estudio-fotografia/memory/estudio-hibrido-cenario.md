@@ -1,9 +1,18 @@
 ---
 name: estudio-hibrido-cenario
-description: Técnica híbrida aprovada — Higgsfield gera só o cenário/luz (prompt que preserva ambiente), as pessoas voltam dos pixels originais por máscara rembg; rosto idêntico com prova por mapa de diferença
+description: Técnica híbrida (Higgsfield gera só o cenário/luz, pessoas voltam dos pixels originais por máscara rembg) — aprovada e depois DESCARTADA pelo cliente Betfage ("sem IA"); manter como opção, nunca como padrão
 metadata:
   type: decision
 ---
+
+**⚠️ ATUALIZAÇÃO 28/out/2026 (mesmo dia):** depois de "amei" e de 147 plates gerados (~37 cr), o
+cliente mandou *"luz natural com fotos reais e ambiente real SEM IA, não modifique a foto em
+hipótese alguma"*. O híbrido saiu da entrega; o que foi entregue foi a revelação fiel à câmera
+([[estudio-revelar-fiel-camera]]). **Regra nova:** para cliente de igreja/evento que pediu
+"natural" alguma vez, a versão 100% real é SEMPRE a entrega-base; o híbrido só se o cliente pedir
+explicitamente E só depois de aprovar 3–5 amostras — nunca gerar o lote inteiro antes disso. A
+v2 do composite (textura real em alta frequência + 65% da luz IA em baixa frequência, raio 8px)
+reduziu a "cara de IA", mas não bastou. Técnica fica documentada abaixo como opção.
 
 **Problema:** cliente quer o acabamento cinematográfico das referências (luz dramática, bloom,
 atmosfera) mas com rosto E ambiente intocados. Grade local (PIL) foi reprovado 2× ("filtro

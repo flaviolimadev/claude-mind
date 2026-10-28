@@ -23,6 +23,13 @@ foto com pessoa; "transplante" de rosto; inpainting em pele/cabelo; upscale gene
 reinterprete rosto. Fundo/céu gerado só se o sujeito for colado por cima intacto (técnica do
 caso Ismael: foto real + só a nuvem transplantada).
 
+**Extensão (28/out/2026, Betfage, feedback final):** a regra pode valer para a FOTO INTEIRA,
+não só o rosto — *"luz natural com fotos reais e ambiente real SEM IA, não modifique a foto em
+hipótese alguma"*. Nesse caso nem o cenário pode ser gerado (o híbrido de
+[[estudio-hibrido-cenario]] cai); a entrega é a revelação fiel à câmera
+([[estudio-revelar-fiel-camera]]) e os posts usam só fotos reais. Se o cliente disser
+"natural"/"real"/"sem IA" em qualquer momento, assumir a versão estrita.
+
 **Why:** a IA generativa deriva identidade (envelhece, acinzenta cabelo, muda proporção) mesmo
 com prompt rígido; para o cliente isso é inaceitável e invalida a entrega inteira.
 
