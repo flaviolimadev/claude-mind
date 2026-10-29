@@ -125,16 +125,22 @@ Regras do protótipo que viram constraints: taxa da plataforma **10 %** (`fee_ce
 
 ## 4. Decisões técnicas para "deixar funcionando"
 
+> **Revisado em 29/10 após ler o `fabrica-kit`** (ver `INFRA-EASYPANEL.md`): a infra passa a ser o
+> **EasyPanel do dono**, com o método e as leis da Fábrica. Vercel/Supabase saem.
+
 | Decisão | Escolha | Por quê |
 |---|---|---|
 | Frontend | **Next.js 15 (App Router) + React 18 + TypeScript**, convertendo o template tela a tela com os mesmos estilos (CSS Modules com os mesmos valores inline) | O dc-runtime é um runtime de protótipo. Precisamos de rotas reais, SEO para galerias públicas (`/@handle`), upload real e PWA. A conversão é mecânica: `sc-if` → `{cond && …}`, `sc-for` → `.map`, `{{ }}` → JSX, `style-hover/focus` → classes. |
-| Backend/BaaS | **Supabase** (Postgres + Auth + Storage + Realtime + Edge Functions) | Um painel só para você configurar; RLS protege originais; Realtime dá o progresso dos jobs sem WebSocket próprio. |
-| Storage | Supabase Storage nos testes → **Cloudflare R2** quando houver volume | R2 não cobra egresso; o produto vende downloads. Mesma API S3, troca transparente. |
-| Workers | **Python 3.11** (motor do estúdio) em contêiner Docker, lendo `jobs` via Postgres (polling 2 s / LISTEN) e gravando `derivatives` | Reaproveita os 17 pipelines; roda em Railway/Fly/Hetzner — ou num **Mac mini** nos primeiros testes (mantém `sips` e Vision). |
-| Pagamentos | **Mercado Pago** (Pix + cartão + split "marketplace") como primeira opção; Asaas/Pagar.me como alternativa; Stripe se quiser cartão internacional | Pix real com QR/copia-e-cola e webhook; repasse automático ao fotógrafo. |
+| Infra | **EasyPanel** (Docker) do dono, provisionado pela API RPC como no `fabrica-kit`: projeto `revela` com `banco` (Postgres), `app` (Next.js, porta 3000), `worker` (Python) e `storage` (MinIO) | É onde os outros 20+ apps do dono rodam; método, scripts e leis já existem; zero conta nova para os primeiros testes. |
+| Banco e auth | **Postgres** nativo do EasyPanel (URL interna) + **Auth.js** (e-mail/senha, Google) com Drizzle | 1 Postgres por projeto (regra do kit); sem BaaS externo. |
+| Storage | **MinIO** no EasyPanel (S3) nos testes → **Bunny Storage + CDN** ou **Cloudflare R2** em produção (mesma API S3, troca por env) | Egresso de downloads é o custo que explode; a Fábrica já opera Bunny/Cloudflare. |
+| Workers | **Python 3.11** (motor do estúdio) em contêiner no mesmo projeto, lendo `jobs` no Postgres (`SKIP LOCKED`) e gravando `derivatives`; progresso por SSE/polling | Reaproveita os 17 pipelines; sem Redis até precisar. |
+| Pagamentos | **Gateway Pix que a Fábrica já usa (Vizzion/ApexPay)**: cobrança → webhook fail-closed e idempotente → libera download; payout Pix ao fotógrafo pelo mesmo gateway. Alternativa: Mercado Pago. | Integração e armadilhas já conhecidas (memórias `conc-gateway`, `fabrica-deposito-fixes`). PIX estático não serve (precisa liberar na hora). |
 | IA | **Claude API** (`claude-sonnet-5-5`) para "Detalhes extras" → parâmetros, curadoria visual e QA; **Higgsfield API** só para camadas de efeito/relight opt-in | Conforme a spec (§4). |
-| Deploy | **Vercel** (web) + Supabase (dados) + Railway (workers) | Online em horas, logs e preview por branch. |
-| Observabilidade | Sentry (web + workers) + tabela `jobs` como trilha de auditoria | Cada lote tem rastro e custo. |
+| Deploy | `provisionar-revela.mjs` (mesma API do kit) → URL de teste `revela-app.<painel>.easypanel.host`; domínio oficial apontado pelo dono depois (`certificateResolver: ""`) | Lei do kit: teste no subdomínio, domínio é manual do dono. |
+| Borda/segurança | Bunny ou Cloudflare só quando o dono pedir, com o playbook do kit (Log antes de Block, nunca cachear `/api`, IP real por header) | Duas quedas totais da Fábrica vieram da borda. |
+| PWA/push | Kit `fabrica-app` (manifest, sw, InstallBanner, Web Push com VAPID) adaptado ao Next | Já resolvido no Get Taxi; iPhone só PWA. |
+| Observabilidade | Sentry (web + worker) + tabela `jobs` como trilha de auditoria | Cada lote tem rastro e custo. |
 
 ---
 
@@ -142,7 +148,7 @@ Regras do protótipo que viram constraints: taxa da plataforma **10 %** (`fee_ce
 
 | Fase | Entrega | Pronto quando | Estimativa |
 |---|---|---|---|
-| **0 · Fundação** | Repo `revela` (Next.js + TS + ESLint), projeto Supabase com o schema acima + RLS, buckets (`originals` privado, `public` para thumbs/prévias), Auth e-mail/Google, deploy na Vercel com domínio de teste, CI. | URL online abre a tela Explorar vazia, login funciona. | 2 dias |
+| **0 · Fundação** | Repo `revela` (Next.js + TS + Drizzle + Auth.js + Dockerfile; `worker/` Python com Dockerfile), `provisionar-revela.mjs` cria no EasyPanel o projeto `revela` com `banco`, `storage` (MinIO), `app` e `worker`, env gerado e salvo, domínio de teste, deploy; migrações no boot; seed com fotos reais. | `https://revela-app.<painel>.easypanel.host` abre Explorar com dados de exemplo; login funciona. | 2 dias |
 | **1 · Telas de leitura** | Converter Explorar, Perfil, Foto, Auth, header/tab bar, toast, modal; dados reais via Supabase; seguir/curtir; busca. | Você cria conta, edita perfil, vê perfis e fotos de teste (semeadas com as fotos do Betfage). | 4 dias |
 | **2 · Upload e publicação** | Upload assinado (foto/vídeo), job de ingestão (dimensões, EXIF, miniatura 400, prévia 1080 borrada/marca-d'água quando paga, duração), tela Publicar completa, download grátis com URL assinada e registro. | Publica uma foto grátis e outra paga; a paga aparece borrada para outro usuário; o download grátis exige conta e baixa o original. | 4 dias |
 | **3 · Estúdio + workers** | Drive (pastas/arquivos/upload em lote), fila de jobs, worker Python com 7 presets (6 do protótipo + Spin blur), **prévia em 3–5 amostras → lote**, comparar antes/depois, publicar uma/todas, "Detalhes extras" via Claude. | Seleciona 20 fotos, roda "Luz dourada", vê progresso em tempo real, compara, publica. Originais intactos. | 6 dias |
@@ -156,14 +162,17 @@ Total até os testes públicos: **~5 semanas** de trabalho contínuo. As fases 1
 
 ## 6. O que preciso de você para começar (nesta ordem)
 
-1. **GitHub:** criar o repositório `revela` (vazio) e me dar acesso — ou autorizar que eu crie em `flaviolimadev`.
-2. **Vercel:** conta conectada ao GitHub (eu configuro o projeto e as variáveis).
-3. **Supabase:** criar um projeto (região `sa-east-1`, São Paulo) e me passar `Project URL`, `anon key`, `service_role key` e a senha do banco (ou acesso ao painel).
-4. **Mercado Pago** (ou Asaas/Pagar.me): conta e **credenciais de teste** (public key + access token de sandbox).
-5. **Anthropic:** chave da Claude API com limite mensal.
-6. **Higgsfield:** chave de API de servidor (quando chegarmos à fase 3 — opcional para os primeiros testes).
-7. **Domínio:** o protótipo usa `revela.app` nos links de compartilhar — confirme o nome e se o domínio já é seu; até lá uso `revela.vercel.app`.
-8. **Resend** (e-mails transacionais) — pode ficar para a fase 4.
+> Revisado após o `fabrica-kit` — detalhe em `INFRA-EASYPANEL.md`.
+
+1. **EasyPanel:** `EASYPANEL_URL`, `EASYPANEL_API_TOKEN` (Settings → API), `EASYPANEL_APPS_DOMAIN`, `EASYPANEL_HOST_IP` — no `.env` local, nunca no chat (se passar, rotacionar).
+2. **GitHub:** repositório `flaviolimadev/revela` vazio, com o EasyPanel autorizado a lê-lo (mesma integração dos outros apps) — ou autorização para eu criar.
+3. **Gateway Pix da Fábrica (Vizzion/ApexPay):** credenciais de teste, ou de produção para uma prova de fogo de R$ 1,00 (fase 4; até lá o checkout fica simulado). Alternativa: Mercado Pago sandbox.
+4. **Anthropic:** chave da Claude API com limite mensal.
+5. **Higgsfield:** chave de API de servidor (o CLI do Mac usa OAuth da sua conta e não serve para o worker) — fase 3, opcional nos primeiros testes.
+6. **Domínio:** o protótipo usa `revela.app`; até você apontar, o teste vive em `revela-app.<painel>.easypanel.host`.
+7. **Resend** (e-mails transacionais) — fase 4.
+
+Com os itens 1 e 2 eu provisiono e entrego a URL de teste no mesmo dia.
 9. **Decisões:** taxa da plataforma (o protótipo diz **10 %**; a spec sugeria 15–20 %); manter "Carteira Revela" com top-up (exige pagamento real para adicionar saldo); preço mínimo por foto; categorias livres (como no protótipo) ou pré-definidas; limites de upload (protótipo: foto 50 MB, vídeo 500 MB/3 min).
 
 ---
