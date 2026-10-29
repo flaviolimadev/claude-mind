@@ -67,6 +67,31 @@ C6 **não** serve ao Revela (precisa liberar o download na hora).
 Com os itens **1 e 2** eu já provisiono e entrego a URL de teste no mesmo dia (telas de leitura com
 dados de exemplo). O resto entra por fase.
 
+## 4.1 O que foi feito de fato (29/10/2026, 20h–20h40)
+
+- Painel real: **`https://6sudfz.easypanel.host`** (custom `chokito.ctrlser.com`), IP `187.127.37.248`,
+  serviços novos em **`*.app.ctrlser.com`** (wildcard DNS resolve em qualquer nível). Padrão da casa:
+  serviços `<projeto>-frontend/-backend/-db`, domínios com `certificateResolver: ""`, builds nixpacks.
+- API: `POST /api/rpc/<grupo>/<proc>` (ex.: `services/app/createService`, `domains/createDomain`,
+  `git/generateKey`, `actions/listActions`, `actions/getAction` → **log de build completo em `.log`**).
+  Payloads no OpenAPI `GET /api/openapi.json` (377 paths, nomes planos `createAppService`…).
+- Projeto **`revela`**: `revela-db` (postgres:17, interno `revela_revela-db:5432`, db `revela`),
+  `revela-storage` (**RustFS** `rustfs/rustfs:latest`, S3 em :9000, volume `/data`, domínio
+  `revela-s3.app.ctrlser.com`), `revela-app` (Dockerfile, :3000, domínio **`revela.app.ctrlser.com`**),
+  `revela-worker` (Dockerfile `worker/Dockerfile`). Script: `revela/scripts/provisionar-revela.mjs`
+  (idempotente; segredos em `revela/.env.deploy.local`, fora do git).
+- **Fonte do código = git por SSH com deploy key por serviço** (`git/generateKey` → `git/getPublicKey`
+  → `gh repo deploy-key add` somente leitura → `services/app/updateSourceGit` com
+  `git@github.com:flaviolimadev/revela.git`). Motivo: o token GitHub gravado no painel está
+  **inválido (401)** e os outros serviços embutem PAT na URL do repo (visível no `inspectService`).
+- Pegadinhas: `minio/minio` **sumiu do Docker Hub** ("repository does not exist") e `quay.io/minio/minio`
+  dá 401 → RustFS no lugar (mesma API S3, env `RUSTFS_ACCESS_KEY/SECRET_KEY/VOLUMES/ADDRESS`).
+  Dockerfile do worker com contexto na raiz do repo → `COPY worker/...`. `gh repo deploy-key list --json`
+  imprime vazio (não `[]`) sem chaves. Primeiro deploy do app falhou por falta de `package-lock.json`
+  (`npm ci`); create-next-app `--skip-install` não gera o lock.
+- Resultado: `https://revela.app.ctrlser.com/api/health` 200 (db/storage configurados); `/` → 307
+  `/prototipo.html`; S3 responde `AccessDenied` XML (vivo). Cert Let's Encrypt emitido sozinho.
+
 ## 5. Como o `.env` fica (modelo)
 
 ```
